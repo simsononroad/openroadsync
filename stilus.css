@@ -85,6 +85,8 @@ h1, h2, h3 { font-family: var(--display); line-height: 1.05; margin: 0; }
 .topnav ul { display: flex; gap: clamp(14px, 3vw, 32px); list-style: none; margin: 0; padding: 0; flex-wrap: wrap; }
 .topnav ul a { text-decoration: none; color: #b9c2c9; font-weight: 500; }
 .topnav ul a:hover { color: #fff; }
+.topnav ul a.nav-dl { color: #fff; background: var(--teal); padding: 4px 12px; border-radius: 5px; }
+.topnav ul a.nav-dl:hover { background: #12876f; }
 .topnav ul a[aria-current="page"] { color: #fff; box-shadow: 0 2px 0 var(--teal); }
 
 .hero {
@@ -112,6 +114,12 @@ h1, h2, h3 { font-family: var(--display); line-height: 1.05; margin: 0; }
   border-radius: 6px;
 }
 .cta:hover { background: #12876f; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 12px; }
+.cta-ghost { background: transparent; color: #eef1f3; box-shadow: inset 0 0 0 2px #4a545c; }
+.cta-ghost:hover { background: rgba(255, 255, 255, 0.06); }
+.dl-meta { color: #8e99a2; font-size: 14px; margin: 10px 0 0; max-width: 46ch; }
+.cta-small { font-size: 18px; padding: 11px 18px; margin-top: 6px; }
+.steps .cta-small { color: #fff; }
 .hero-note { color: #8e99a2; font-size: 16px; max-width: 46ch; margin: 18px 0 0; }
 
 /* a kijelző fotója "kávába" foglalva */
