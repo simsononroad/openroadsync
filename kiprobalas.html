@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenRoadSync kipróbálás</title>
+  <meta name="description" content="Próbáld ki az OpenRoadSync-et a böngészőben: szimulált Honda TFT kijelző a kormánygombokkal, mellette a telefonos app beállításaival.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="stilus.css">
+  <link rel="stylesheet" href="kiprobalas.css">
+</head>
+<body class="sim-page">
+
+<header class="sim-head">
+  <nav class="topnav" aria-label="Fő navigáció">
+    <a class="brand" href="index.html">OpenRoadSync</a>
+    <ul>
+      <li><a href="index.html#mit-tud">Mit tud</a></li>
+      <li><a href="index.html#osszevetes">Összevetés</a></li>
+      <li><a href="index.html#gombok">Gombok</a></li>
+      <li><a href="kiprobalas.html" aria-current="page">Kipróbálás</a></li>
+    </ul>
+  </nav>
+  <h1>Próbáld ki a motoron – a böngészőben</h1>
+  <p>Bal oldalt a motor kijelzője és a kormány bal oldali kapcsolója, jobb oldalt a telefonos app.
+    Amit az appban átállítasz, azonnal úgy működik a kijelzőn. Billentyűzettel is megy: nyilak,
+    Enter (▸), Backspace (vissza), Shift + → (hosszú ▸: kilépés).</p>
+</header>
+
+<main class="sim">
+  <section aria-labelledby="motor-cim">
+    <h2 id="motor-cim">A motor</h2>
+
+    <div class="cluster">
+      <div class="lamps" aria-hidden="true">
+        <svg viewBox="0 0 32 28"><path d="M16 2a12 12 0 1 0 12 12" fill="none" stroke="#f39a1d" stroke-width="3"/><path d="M27 9l1 5-5-1" fill="none" stroke="#f39a1d" stroke-width="3"/><text x="16" y="20" text-anchor="middle" font-family="Barlow" font-weight="700" font-size="13" fill="#f39a1d">T</text></svg>
+        <svg viewBox="0 0 32 28"><path d="M5 22c4-9 18-9 22 0M9 14l3 4M23 14l-3 4" fill="none" stroke="#1e3a24" stroke-width="2.5"/></svg>
+        <svg viewBox="0 0 32 28"><text x="16" y="23" text-anchor="middle" font-family="Barlow" font-weight="700" font-size="24" fill="#33d35a">N</text></svg>
+      </div>
+
+      <div class="tft-sim" id="tft" role="img" aria-label="Szimulált motor-kijelző">
+        <svg class="tft-base" viewBox="0 0 800 440" aria-hidden="true">
+          <defs>
+            <linearGradient id="band" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8f979c"/><stop offset="1" stop-color="#6c7378"/></linearGradient>
+            <linearGradient id="fuelbg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#565f65"/><stop offset="1" stop-color="#434a50"/></linearGradient>
+          </defs>
+          <!-- felső sor: Bluetooth + telefon, figyelmeztetés, óra -->
+          <g transform="translate(12 16)">
+            <rect width="22" height="27" rx="8" fill="#e9edf0"/>
+            <path d="M7 8l8 8-4 4V5l4 4-8 8" fill="none" stroke="#1a1f23" stroke-width="2" stroke-linejoin="round"/>
+            <rect x="27" y="1" width="15" height="25" rx="2.5" fill="none" stroke="#e9edf0" stroke-width="2.6"/>
+            <rect x="31" y="20" width="7" height="2" fill="#e9edf0"/>
+          </g>
+          <g id="ic-nav" transform="translate(62 18)"><path d="M11 0 21 23 11 18 1 23z" fill="#e9edf0"/></g>
+          <g id="ic-music" transform="translate(90 17)"><path d="M8 3v15a4.5 4.5 0 1 0 3 4.2V9h9v9.4a4.5 4.5 0 1 0 3 4.2V0z" transform="scale(.9)" fill="#e9edf0"/></g>
+          <g transform="translate(433 14)">
+            <rect width="44" height="42" rx="6" fill="#f2603a"/>
+            <path d="M22 8 37 34H7z" fill="none" stroke="#fff" stroke-width="3" stroke-linejoin="round"/>
+            <rect x="20.5" y="17" width="3" height="9" fill="#fff"/><rect x="20.5" y="28" width="3" height="3" fill="#fff"/>
+          </g>
+          <rect x="638" y="14" width="106" height="44" rx="6" fill="#5b666f"/>
+          <text id="tft-clock" x="691" y="47" text-anchor="middle" font-size="32" font-weight="600" fill="#fff">12:00</text>
+
+          <!-- fokozat és üzemanyag -->
+          <rect x="18" y="145" width="82" height="77" rx="5" fill="#24aa5d"/>
+          <text x="59" y="208" text-anchor="middle" font-size="70" font-weight="700" fill="#fff">N</text>
+          <rect x="28" y="258" width="84" height="152" rx="6" fill="url(#fuelbg)"/>
+          <text x="40" y="285" font-size="24" font-weight="600" fill="#fff">F</text>
+          <rect x="38" y="291" width="24" height="3" fill="#fff"/>
+          <rect x="40" y="300" width="20" height="82" rx="2" fill="#f1f4f6"/>
+          <g fill="#4b5359"><rect x="40" y="316" width="9" height="2.5"/><rect x="40" y="332" width="9" height="2.5"/><rect x="40" y="348" width="9" height="2.5"/><rect x="40" y="364" width="9" height="2.5"/></g>
+          <text x="40" y="404" font-size="24" font-weight="600" fill="#fff">E</text>
+          <path d="M74 322h14v26H74zM77 326v8h8v-8zM88 330l5 3v11a2 2 0 0 0 4 0v-14l-4-4" fill="#f1f4f6" stroke="#f1f4f6" stroke-width="1.2" stroke-linejoin="round"/>
+
+          <!-- az app nézetének fordulatszámmérője (szkript rajzolja) -->
+          <g id="g-app"></g>
+          <!-- a motor saját nézete (kilépés után) -->
+          <g id="g-native"></g>
+          <g id="quick"></g>
+        </svg>
+
+        <div class="tile t-sys" id="tile"></div>
+        <div class="banner" id="banner" hidden></div>
+      </div>
+
+      <div class="lamps lamps-r" aria-hidden="true">
+        <svg viewBox="0 0 34 28"><path d="M3 9h7v-3h5v3h3v10h-3v3h-5v-3H3z" fill="#2fd25a"/><text x="27" y="19" text-anchor="middle" font-family="Barlow" font-weight="700" font-size="14" fill="#2fd25a">A</text></svg>
+        <svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="10" fill="none" stroke="#f39a1d" stroke-width="2.4"/><path d="M4 9a14 14 0 0 0 0 14M28 9a14 14 0 0 1 0 14" fill="none" stroke="#f39a1d" stroke-width="2.4"/><text x="16" y="20" text-anchor="middle" font-family="Barlow" font-weight="700" font-size="9.5" fill="#f39a1d">ABS</text></svg>
+      </div>
+    </div>
+
+    <div class="switchgear" aria-label="Kormánykapcsoló">
+      <div class="dpad">
+        <button class="k-up" data-key="up" aria-label="Fel">▴</button>
+        <button class="k-left" data-key="left" aria-label="Balra">◂</button>
+        <span class="hub" aria-hidden="true"></span>
+        <button class="k-right" data-key="right" aria-label="Jobbra / OK – hosszan: kilépés a motor nézetébe">▸</button>
+        <button class="k-down" data-key="down" aria-label="Le">▾</button>
+      </div>
+      <button class="back-btn" data-key="back" aria-label="Vissza">08<small>vissza</small></button>
+      <p class="sg-hint">▸ hosszan nyomva: kilépés a motor saját nézetébe (billentyűzeten: Shift + →)</p>
+    </div>
+
+    <div class="sim-actions" aria-label="Szimuláció">
+      <button id="act-notif">Új értesítés érkezik</button>
+      <button id="act-call">Bejövő hívás</button>
+      <button id="act-track">A zeneszám véget ér</button>
+      <button id="act-step">Következő navigációs utasítás</button>
+      <button id="act-exit">Kilépés a motor nézetébe</button>
+      <button id="act-reset">Újrakezdés</button>
+    </div>
+    <p class="sim-log" id="sim-log" aria-live="polite"></p>
+    <p class="sim-hint">A kijelző a valódi motorról készült videó alapján készült, a formátumok a valódi
+      Bluetooth-üzeneteken alapulnak. A kanyar-nyilak a motor saját ikonjai: az
+      app az OsmAnd utasításából ismeri fel a manővert.</p>
+  </section>
+
+  <section aria-labelledby="telefon-cim">
+    <h2 id="telefon-cim">A telefon</h2>
+    <div class="phone-sim" id="phone">
+      <div class="ps-status"><span id="ps-clock">12:00</span><span>▾ ▴ 87%</span></div>
+      <div class="ps-screen" id="ps-screen"></div>
+      <nav class="ps-tabs" id="ps-tabs" role="tablist">
+        <button role="tab" data-tab="home" aria-selected="true">Főoldal</button>
+        <button role="tab" data-tab="dest">Célpontok</button>
+        <button role="tab" data-tab="short">Gyorsgombok</button>
+        <button role="tab" data-tab="settings">Beállítások</button>
+      </nav>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p>Szimuláció – a valódi app a motor Bluetooth-modulján keresztül ugyanígy viselkedik. Az OpenRoadSync
+    nem hivatalos, a Hondától független hobbiprojekt.</p>
+</footer>
+
+<script src="szimulator.js"></script>
+</body>
+</html>

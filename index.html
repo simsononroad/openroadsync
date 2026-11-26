@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenRoadSync</title>
+  <meta name="description" content="Nem hivatalos RoadSync-helyettesítő Androidra: OsmAnd navigáció, zene, értesítések és a telefonod vezérlése a Honda kormánygombjairól.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="stilus.css">
+</head>
+<body>
+
+<header class="dash">
+  <nav class="topnav" aria-label="Fő navigáció">
+    <a class="brand" href="#">OpenRoadSync</a>
+    <ul>
+      <li><a href="#mit-tud">Mit tud</a></li>
+      <li><a href="#osszevetes">Összevetés</a></li>
+      <li><a href="#gombok">Gombok</a></li>
+      <li><a href="#telepites">Telepítés</a></li>
+      <li><a href="kiprobalas.html">Kipróbálás</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-text">
+      <h1>A Honda kijelződ most OsmAnd-dal navigál.</h1>
+      <p class="lead">Nem hivatalos RoadSync-helyettesítő Androidra. Navigáció, zene, értesítések,
+        sőt az egész telefonod – a kormány bal oldali gombjairól, a motor saját TFT kijelzőjén.</p>
+      <p class="hero-cta"><a class="cta" href="kiprobalas.html">Próbáld ki a böngészőben</a></p>
+      <p class="hero-note">Visszafejtett Bluetooth-protokoll, a kijelzőre küldött üzenetek bájtra
+        egyeznek az eredeti appéval.</p>
+    </div>
+    <figure class="tft">
+      <img src="kepek/motor-navigacio.webp" width="1390" height="830"
+           alt="A motor TFT kijelzője: jobb oldalt a Navigálás csempe egyenes nyíllal, alul zöld sávban a Navigáció felirat">
+      <figcaption>Navigáció közben: a csempén a következő manőver, alul az utasítás sávja.</figcaption>
+    </figure>
+  </div>
+
+  <ul class="tiles" aria-label="Képek a motor kijelzőjéről">
+    <li>
+      <img src="kepek/motor-fomenu.webp" width="900" height="335" loading="lazy"
+           alt="Főmenü csempe: Navigáció, nyilakkal fel, le és jobbra">
+      <span>Főmenü</span>
+    </li>
+    <li>
+      <img src="kepek/motor-mentett-celok.webp" width="800" height="470" loading="lazy"
+           alt="Mentett célok csempe kedvenc-hely ikonnal, balra és jobbra nyíllal">
+      <span>Mentett célok</span>
+    </li>
+    <li>
+      <img src="kepek/motor-zene.webp" width="900" height="320" loading="lazy"
+           alt="Narancssárga Zene csempe a motor kijelzőjén">
+      <span>Zene</span>
+    </li>
+  </ul>
+</header>
+
+<main>
+
+  <section id="mit-tud" class="area">
+    <h2 class="area-title">Mit tud</h2>
+
+    <article class="feature">
+      <div class="feature-text">
+        <h3>Navigáció OsmAnd-dal</h3>
+        <p>A motor menüjéből választasz célt, a telefon OsmAnd-ja elindítja az útvonalat, a kijelzőn
+          megjelenik a navigációs képernyő és az utasítások sávja.</p>
+        <ul>
+          <li>Haza, Munkahely, mentett célok – bármelyik appból felvehetők megosztással.</li>
+          <li>Közeli helyek: benzinkút, parkoló, bolt, ATM, szerviz. Találati lista névvel és
+            távolsággal; a motoros parkolók és motorszervizek kerülnek előre.</li>
+          <li>Offline térképek, motoros útvonalprofil, előfizetés nélkül.</li>
+        </ul>
+      </div>
+      <div class="shots shots-photo">
+        <img src="kepek/motor-mentett-celok.webp" width="800" height="470" loading="lazy"
+             alt="Mentett célok menüpont a motor kijelzőjén">
+      </div>
+    </article>
+
+    <article class="feature">
+      <div class="feature-text">
+        <h3>Zene, bármelyik lejátszóból</h3>
+        <p>Spotify, Deezer, YouTube Music – azt vezérli, amelyik éppen szól. A kijelzőn a lejátszó
+          neve, a szám címe és az előadó.</p>
+        <ul>
+          <li>Lejátszás és szünet, következő, előző szám.</li>
+          <li>Hangerő a kormányról, visszajelzéssel a kijelzőn.</li>
+          <li>A gombok kiosztása átállítható.</li>
+        </ul>
+      </div>
+      <div class="shots shots-photo">
+        <img src="kepek/motor-zene.webp" width="900" height="320" loading="lazy"
+             alt="Zene csempe a motoron">
+      </div>
+    </article>
+
+    <article class="feature">
+      <div class="feature-text">
+        <h3>Értesítések a kijelzőn</h3>
+        <p>Bármelyik app értesítése felugrik a motoron: Messenger, WhatsApp, SMS, Gmail. Az utolsó
+          húsz a menüben lapozható.</p>
+        <ul>
+          <li>Tartalom központú mód: a küldő alul a sávban, maga az üzenet nagyban a jobb oldali panelen.</li>
+          <li>Elrejthető a szöveg, ha csak az app nevét szeretnéd látni.</li>
+        </ul>
+      </div>
+      <div class="shots">
+        <a class="phone" href="kepek/app-most.webp"><img src="kepek/app-most.webp" width="540" height="1200" loading="lazy"
+             alt="A telefonos app Most kártyája: navigáció, zene és a legutóbbi SMS értesítés"></a>
+      </div>
+    </article>
+
+    <article class="feature">
+      <div class="feature-text">
+        <h3>A telefonod a kormányról</h3>
+        <p>A Telefon menüben kétféle vezérlés van.</p>
+        <ul>
+          <li><strong>Teljes vezérlés:</strong> elemről elemre lépsz a telefon képernyőjén (piros keret
+            mutatja), kattintasz, lapozol a kezdőképernyő oldalai között. A motor kijelzőjén a kijelölt
+            elem neve látszik.</li>
+          <li><strong>Gyorsgombok:</strong> saját lista appindításhoz, rendszerműveletekhez,
+            linkekhez, Home Assistant eszközökhöz és Automate vagy Tasker parancsokhoz.</li>
+          <li>Home Assistant saját aláírású tanúsítvánnyal is, ujjlenyomat-ellenőrzéssel.</li>
+        </ul>
+      </div>
+      <div class="shots">
+        <a class="phone" href="kepek/telefon-vezerles.webp"><img src="kepek/telefon-vezerles.webp" width="540" height="1200" loading="lazy"
+             alt="Telefon kezdőképernyő, a Gmail ikon piros kerettel kijelölve"></a>
+        <a class="phone" href="kepek/gyorsgombok.webp"><img src="kepek/gyorsgombok.webp" width="540" height="1200" loading="lazy"
+             alt="Gyorsgombok lista: Gmail, Navigáció Haza, Garázskapu Home Assistant"></a>
+        <a class="phone" href="kepek/ha-tanusitvany.webp"><img src="kepek/ha-tanusitvany.webp" width="540" height="1200" loading="lazy"
+             alt="Home Assistant tanúsítvány elfogadása: tárgy, kiadó, lejárat és SHA-256 ujjlenyomat"></a>
+      </div>
+    </article>
+
+    <article class="feature feature-wide">
+      <div class="feature-text">
+        <h3>Motoros dashboard a telefonon</h3>
+        <p>Ha a telefon a kormányon van: nagy óra, GPS-sebesség, navigációs utasítás, zene
+          érintéssel vezérelhető gombokkal és a legutóbbi értesítés. Állva és fektetve is,
+          a képernyő nem alszik el.</p>
+        <p>OLED módban a háttér teljesen fekete – ezek a pixelek ki vannak kapcsolva.</p>
+      </div>
+      <div class="shots">
+        <a class="phone" href="kepek/dashboard-allo.webp"><img src="kepek/dashboard-allo.webp" width="540" height="1200" loading="lazy"
+             alt="Dashboard álló helyzetben, világos háttérrel: 15:21, dátum, sebesség, zene és értesítés"></a>
+        <a class="phone phone-oled" href="kepek/dashboard-oled.webp"><img src="kepek/dashboard-oled.webp" width="540" height="1200" loading="lazy"
+             alt="Dashboard OLED módban, fekete háttéren"></a>
+        <a class="phone phone-land" href="kepek/dashboard-fekvo.webp"><img src="kepek/dashboard-fekvo.webp" width="1200" height="540" loading="lazy"
+             alt="Dashboard fekvő helyzetben: balra az óra, jobbra navigáció, zene, értesítés"></a>
+      </div>
+    </article>
+
+    <article class="feature">
+      <div class="feature-text">
+        <h3>Letisztult app, fejlesztői móddal</h3>
+        <p>A főképernyőn az állapot, a kapcsoló és csak a még hiányzó beállítási lépések. A
+          fejlesztői mód naplót, protokolltesztet és minden haladó beállítást ad.</p>
+        <ul>
+          <li>Világos és sötét téma.</li>
+          <li>Gombkiosztás a Zene és a Telefon módhoz, beragadás elleni védelemmel.</li>
+        </ul>
+      </div>
+      <div class="shots">
+        <a class="phone" href="kepek/app-fokepernyo.webp"><img src="kepek/app-fokepernyo.webp" width="540" height="1200" loading="lazy"
+             alt="Főképernyő: Kikapcsolva, HONDA BTU 85D4, dashboard kártya, egy hiányzó beállítási lépés"></a>
+        <a class="phone" href="kepek/app-fokepernyo-sotet.webp"><img src="kepek/app-fokepernyo-sotet.webp" width="540" height="1200" loading="lazy"
+             alt="Főképernyő sötét témában"></a>
+        <a class="phone" href="kepek/gombkiosztas.webp"><img src="kepek/gombkiosztas.webp" width="540" height="1200" loading="lazy"
+             alt="Gombkiosztás: Zene és Telefon vezérlés módban mind az öt gomb beállítható"></a>
+      </div>
+    </article>
+  </section>
+
+  <section id="osszevetes" class="area compare-area">
+    <h2 class="area-title">Összevetés az eredeti RoadSync-kel</h2>
+    <p class="area-lead">Az eredeti funkcióit a menüiből ismerjük, amelyek a Bluetooth-naplóban szerepeltek.</p>
+
+    <div class="compare">
+      <div class="col col-more">
+        <h3>Többet tud</h3>
+        <ul>
+          <li>OsmAnd navigáció: offline térkép, motoros profil, fiók nélkül</li>
+          <li>Közeli helyek OpenStreetMap-ből, találati listával</li>
+          <li>Mentett célok megosztással bármelyik appból</li>
+          <li>Bármelyik zenelejátszó, hangerő a kormányról</li>
+          <li>Bármelyik app értesítése, lapozható listával, tartalom központú nézettel</li>
+          <li>Az egész telefon vezérlése a gombokkal</li>
+          <li>Gyorsgombok: appok, Home Assistant, Automate, Tasker</li>
+          <li>Átállítható gombkiosztás</li>
+          <li>Telefonos dashboard, OLED móddal</li>
+          <li>Fejlesztői mód naplóval</li>
+        </ul>
+      </div>
+      <div class="col col-less">
+        <h3>Kevesebbet tud</h3>
+        <ul>
+          <li>Üzenetek felolvasása és megválaszolása nincs</li>
+          <li>Hangvezérlés nincs</li>
+          <li>Időjárás panel nincs</li>
+          <li>A motor betűkészletében nincs ő és ű, helyettük ö és ü látszik</li>
+          <li>A hitelesítés a naplóból kimásolt tokennel megy; motor-szoftverfrissítés után elromolhat</li>
+          <li>Kézi telepítés, néhány Android-engedélyt magadnak kell megadni</li>
+          <li>Csak egy motoron kipróbálva</li>
+        </ul>
+      </div>
+      <div class="col col-same">
+        <h3>Ugyanúgy működik</h3>
+        <ul>
+          <li>A kijelző képernyői és a sáv formátuma</li>
+          <li>Hívások: fogadás, elutasítás, bontás, hangerő, tárcsázás a kedvencekből, legutóbbiakból és a névjegyekből</li>
+          <li>A kormánygombok: ▴ ▾ ◂ ▸ és a vissza</li>
+          <li>A motor órája a telefonról áll be</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="gombok" class="area">
+    <h2 class="area-title">Melyik gomb mit csinál</h2>
+    <p class="area-lead">Az alapkiosztás. A Zene és a Telefon módban mind az öt gomb átállítható a beállításokban.</p>
+    <div class="table-wrap">
+      <table class="keys">
+        <thead>
+          <tr>
+            <th scope="col">Gomb</th>
+            <th scope="col">Menükben</th>
+            <th scope="col">Navigáció közben</th>
+            <th scope="col">Zene</th>
+            <th scope="col">Telefon vezérlés</th>
+            <th scope="col">Hívás</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row"><span class="key">▴</span></th><td>Előző menüpont</td><td>–</td><td>Hangerő fel</td><td>Előző elem</td><td>Hangerő fel</td></tr>
+          <tr><th scope="row"><span class="key">▾</span></th><td>Következő menüpont</td><td>–</td><td>Hangerő le</td><td>Következő elem, a végén lapoz</td><td>Hangerő le</td></tr>
+          <tr><th scope="row"><span class="key">◂</span></th><td>Vissza</td><td>Befejezés?</td><td>Lejátszás / szünet</td><td>Vissza</td><td>Elutasítás / bontás</td></tr>
+          <tr><th scope="row"><span class="key">▸</span></th><td>Kiválasztás (hosszan: kilépés a motor nézetébe)</td><td>Igen (a Befejezés? képernyőn)</td><td>Következő szám</td><td>Kattintás</td><td>Fogadás</td></tr>
+          <tr><th scope="row"><span class="key key-wide">08</span></th><td>Vissza</td><td>Főmenü</td><td>Főmenü</td><td>Rendszermenü</td><td>Menübe (a hívás megy tovább)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="telepites" class="area">
+    <h2 class="area-title">Telepítés</h2>
+    <ol class="steps">
+      <li>
+        <h3>APK telepítése</h3>
+        <p>Android Studióban buildeld a projektet, vagy telepítsd a kész APK-t.</p>
+      </li>
+      <li>
+        <h3>Az eredeti RoadSync leállítása</h3>
+        <p>A motor egyszerre egy appal tart kapcsolatot. A Bluetooth-párosítás maradjon meg.</p>
+      </li>
+      <li>
+        <h3>Engedélyek</h3>
+        <p>A főképernyő lépésenként végigvezet: Bluetooth, helyzet, értesítések olvasása,
+          háttérben futás, navigáció indítása a motorról.</p>
+      </li>
+      <li>
+        <h3>Motor kiválasztása, kapcsolat bekapcsolása</h3>
+        <p>Válaszd a „HONDA BTU …” eszközt, és kapcsold be a kapcsolatot. Ezután a motor
+          bekapcsolásakor magától csatlakozik.</p>
+      </li>
+      <li>
+        <h3>Ha kell: telefon vezérlés</h3>
+        <p>Beállítások, Telefon vezérlés a motorról, majd Akadálymentesség. Ha az Android
+          „Korlátozott beállítás”-t ír: Alkalmazásinformáció, ⋮ menü, „Korlátozott beállítások
+          engedélyezése”.</p>
+      </li>
+    </ol>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <p>Az OpenRoadSync nem hivatalos, a Hondától független hobbiprojekt. A Honda és a RoadSync
+    a Honda Motor Co., Ltd. védjegyei. A telefon menet közbeni vezérlése elvonhatja a figyelmet
+    a vezetésről – használat saját felelősségre.</p>
+</footer>
+
+</body>
+</html>
