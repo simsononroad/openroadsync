@@ -43,6 +43,7 @@
   --music-head: #e9892b; --music-body: #f7a440; --music-deep: #6f341b;
   --msg-head: #1597d0; --msg-body: #29b6ec; --msg-deep: #0b4565;
   --phone-head: #9a88d9; --phone-body: #b7a8f0; --phone-deep: #3e3170;
+  --wx-head: #4f7aa0; --wx-body: #6f97bb;
   --banner: #14a786;
   position: relative;
   aspect-ratio: 800 / 440;
@@ -104,6 +105,7 @@
 .t-music .tile-head { background: var(--music-head); } .t-music .tile-body { background: linear-gradient(#ffb04d, var(--music-body) 45%, #f0982f); }
 .t-msg .tile-head { background: var(--msg-head); } .t-msg .tile-body { background: linear-gradient(#35c0f2, var(--msg-body) 45%, #1fa9e0); }
 .t-phone .tile-head { background: var(--phone-head); } .t-phone .tile-body { background: linear-gradient(#c3b6f5, var(--phone-body) 45%, #a998e8); }
+.t-wx .tile-head { background: var(--wx-head); } .t-wx .tile-body { background: linear-gradient(#7fa6c9, var(--wx-body) 45%, #5f88ad); }
 .t-sys .tile-body { background: linear-gradient(#25d2ae, var(--nav-body) 45%, #18b996); }
 .t-sys .tile-text { opacity: 0.55; }
 

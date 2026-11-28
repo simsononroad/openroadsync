@@ -22,6 +22,51 @@ const P = {
   finish: 'M5 2h2v20H5zm3 1h13v11H8zm2 1.8v2.4h2.4V4.8zm4.8 0v2.4h2.4V4.8zm-2.4 2.4v2.4h2.4V7.2zm4.8 0v2.4H19V7.2zM10 9.6V12h2.4V9.6zm4.8 0V12h2.4V9.6z',
   bolt: 'M11 21h-1l1-7H7.5c-.88 0-.33-.75-.31-.78C8.48 10.94 10.42 7.54 13.01 3h1l-1 7h3.51c.4 0 .62.19.4.66C12.97 17.55 11 21 11 21z',
   home: 'M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z',
+  // a motor időjárás-ikonjai (0x0a–0x11)
+  wx_sun: 'M12 6.5a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11zM11 0h2v4h-2zM11 20h2v4h-2zM0 11h4v2H0zM20 11h4v2h-4zM3.5 2.1l2.8 2.8-1.4 1.4-2.8-2.8zM17.7 18.1l2.8 2.8-1.4 1.4-2.8-2.8zM2.1 20.5l2.8-2.8 1.4 1.4-2.8 2.8zM18.1 6.3l2.8-2.8 1.4 1.4-2.8 2.8z',
+  wx_night: 'M12.5 2a10 10 0 1 0 9.4 13.4A8 8 0 0 1 12.5 2z',
+  wx_partly: 'M8 3.5a4.5 4.5 0 0 1 4.3 3.1A6 6 0 0 1 17.6 10a4.5 4.5 0 0 1 .4 9H6.5a5 5 0 0 1-2.3-9.4A4.5 4.5 0 0 1 8 3.5z',
+  wx_cloudy: 'M6.5 20a5 5 0 0 1-.6-10A7 7 0 0 1 19.3 9.6 5.2 5.2 0 0 1 18.5 20z',
+  wx_rain: 'M6.5 14a5 5 0 0 1-.6-10A7 7 0 0 1 19.3 3.6 5.2 5.2 0 0 1 18.5 14zM7 16h2l-1.5 5h-2zM11.5 16h2L12 21h-2zM16 16h2l-1.5 5h-2z',
+  wx_storm: 'M6.5 13a5 5 0 0 1-.6-10A7 7 0 0 1 19.3 2.6 5.2 5.2 0 0 1 18.5 13zM12 14h4l-2.5 4H16l-6 6 1.5-4.5H9z',
+  wx_snow: 'M11 1h2v22h-2zM1.5 6.3l1-1.7 19.1 11-1 1.7zM2.5 19.4l-1-1.7 19.1-11 1 1.7zM8 2.5l4 3 4-3v2.4l-4 3-4-3zM8 21.5l4-3 4 3v-2.4l-4-3-4 3z',
+  wx_fog: 'M2 6h20v2.4H2zM4 11h16v2.4H4zM2 16h20v2.4H2z',
+  // a motor további ikonjai a saját csempékhez
+  replay: 'M12 4V1L7 5.5 12 10V6.5a6 6 0 1 1-6 6H3.5A8.5 8.5 0 1 0 12 4z',
+  card: 'M2 4h20v16H2zm2.2 2.2v11.6h15.6V6.2zM6 8h5v5H6zm7 0h5v1.8h-5zm0 3.2h5V13h-5zM6 14.6h12v1.8H6z',
+  check: 'M8 2h8v2h3v18H5V4h3zm1.5 1.5v2h5v-2zm-1 10.6 2.4 2.4 5.6-5.6-1.4-1.4-4.2 4.2-1-1z',
+  warn: 'M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm-1.3 4.5v7.5h2.6V6.5zm0 9.5v2.6h2.6V16z',
+  sim: 'M6 2h9l5 5v15H6zm2.5 9v8h9v-8z',
+  nosig: 'M2 20h3v-4H2zm5 0h3v-8H7zm5 0h3V9h-3zm5-11 2 2 2-2 1 1-2 2 2 2-1 1-2-2-2 2-1-1 2-2-2-2z',
+  bars0: 'M8 2h8v4H8zm.8.8v2.4h6.4V2.8zM8 7h8v4H8zm.8.8v2.4h6.4V7.8zM8 12h8v4H8zm.8.8v2.4h6.4v-2.4zM8 17h8v4H8zm.8.8v2.4h6.4v-2.4z',
+};
+function barsIcon(pct) { const n = Math.max(0, Math.min(4, Math.round(pct / 25))); return 'bars' + n; }
+// 0–4 teli csík alulról (a motor 0x76…0x7b szintjelzője)
+for (let n = 1; n <= 4; n++) {
+  const segs = [2, 7, 12, 17].map((y, i) => (3 - i) < n ? `M8 ${y}h8v4H8z` : `M8 ${y}h8v4H8zm.8.8v2.4h6.4v-2.4z`).join('');
+  P['bars' + n] = segs;
+}
+// WMO kód -> a motor ikonja és leírása (ugyanaz, mint Weather.java)
+function wxIcon(code, day = true) {
+  if (code === 0) return day ? 'wx_sun' : 'wx_night';
+  if (code <= 2) return 'wx_partly';
+  if (code === 3) return 'wx_cloudy';
+  if (code === 45 || code === 48) return 'wx_fog';
+  if (code >= 95) return 'wx_storm';
+  if ((code >= 71 && code <= 77) || code === 85 || code === 86) return 'wx_snow';
+  if (code >= 51) return 'wx_rain';
+  return 'wx_cloudy';
+}
+function wxDesc(code) {
+  return ({ 0: 'Derült', 1: 'Többnyire derült', 2: 'Részben felhős', 3: 'Borult', 45: 'Köd', 61: 'Eső', 80: 'Zápor', 95: 'Zivatar', 71: 'Havazás' })[code] || 'Felhős';
+}
+// mintaadat (a valódi app az Open-Meteo-ból kéri le a telefon helyére és a célra)
+const WX = {
+  now: { temp: 14, feels: 12, wind: 16, code: 2 },
+  dest: { temp: 17, code: 1 },
+  hours: [['18:00', 13, 10, 3], ['19:00', 12, 30, 61], ['20:00', 11, 60, 61], ['21:00', 10, 40, 80], ['22:00', 9, 10, 3], ['23:00', 9, 0, 0]],
+  days: [['Ma', 7, 15, 60, 61], ['Holnap', 6, 17, 10, 2], ['Szombat', 8, 19, 0, 0]],
+  at: '',
 };
 const svg = (name) => `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" fill-rule="evenodd" d="${P[name] || P.phone}"/></svg>`;
 
@@ -215,6 +260,7 @@ function freshState() {
   return {
     prefs: {
       musicInfo: true, notifPopup: true, notifContent: true, notifFocus: false, phoneControl: true, calls: true,
+      weather: true, rainAlert: true, accel: true, accelTarget: 100,
       keymap: JSON.parse(JSON.stringify(KEYMAP_DEFAULTS)),
     },
     destinations: ['Balaton, Tihany', 'Dobogókő', 'Auchan Gödöllő', 'Tata, Öreg-tó'],
@@ -229,6 +275,15 @@ function freshState() {
     media: { app: 'Deezer', playing: true, track: 0, volume: 60 },
     nav: { active: false, pending: false, dest: '', steps: [], step: 0 },
     call: { state: 'idle', name: '', number: '', since: 0, volume: 70 },
+    acc: { state: 'NO_GPS', speed: 0, startedAt: 0, last: -1, best: -1, lastBest: false, results: [], browse: -1 },
+    panels: [
+      { type: 'text', title: 'Emlékeztető', line1: 'Lánc kenése', line2: '500 km', icon: 'check', color: 'music' },
+      { type: 'text', title: 'Jegyzet', line1: 'Garázskód 1234', line2: 'Kulcs a dobozban', icon: '', color: 'phone' },
+      { type: 'battery', title: '', color: 'nav' },
+      { type: 'network', title: '', color: 'msg' },
+      { type: 'date', title: '', color: 'nav' },
+      { type: 'calendar', title: '', color: 'phone' },
+    ],
     phone: { view: 'app', tab: 'home', page: 0, app: null, sel: 0, control: false, opened: [] },
   };
 }
@@ -246,12 +301,48 @@ const scr = (id, def) => { screens[id] = { id, index: 0, wrap: false, parent: nu
 scr('main', {
   wrap: true, app: 'nav',
   items: () => {
-    const l = [
+    const l = [];
+    if (S.prefs.weather) l.push({ title: 'Időjárás', icon: wxIcon(WX.now.code), app: 'wx', sub: `${WX.now.temp}°C`, act: () => openList('weather') });
+    l.push(
       { title: 'Navigáció', icon: 'nav', app: 'nav', act: () => openList('nav') },
       { title: 'Zene', icon: 'music', app: 'music', act: openMusic },
       { title: 'Értesítések', icon: 'msg', app: 'msg', act: () => { openList('notif'); } },
-    ];
+    );
     if (S.prefs.phoneControl || S.prefs.calls || S.shortcuts.length) l.push({ title: 'Telefon', icon: 'phone', app: 'phone', act: () => openList('phoneRoot') });
+    if (S.prefs.accel) l.push({ title: accTitle(), icon: 'nav', app: 'music', sub: S.acc.last >= 0 ? `Legutóbb ${fmtAcc(S.acc.last)}` : '', act: openAccel });
+    if (S.panels.length) l.push({ title: 'Saját', icon: 'card', app: 'nav', act: () => openList('custom') });
+    return l;
+  },
+});
+scr('custom', {
+  parent: 'main', app: 'nav',
+  items: () => S.panels.map((p) => { const v = panelView(p); return v.icon ? { title: v.title, icon: v.icon, sub: v.sub, app: p.color } : { title: v.title, content: [v.l1, v.l2], app: p.color }; }),
+});
+const PANEL_TYPES = { text: 'Saját szöveg', battery: 'Akkumulátor', network: 'Hálózat', date: 'Dátum', calendar: 'Következő naptáresemény' };
+const PANEL_COLORS = { nav: 'Türkiz', phone: 'Levendula', msg: 'Kék', music: 'Narancs' };
+const PANEL_ICONS = { '': 'Nincs ikon – két sor szöveg', check: 'Pipa', warn: 'Figyelem', fav: 'Kedvenc hely', fuel: 'Benzinkút', parking: 'Parkoló', store: 'Bolt', repair: 'Szerviz', phone: 'Telefon', msg: 'Üzenet', music: 'Zene', wx_sun: 'Nap', wx_rain: 'Eső', finish: 'Cél zászló' };
+/** Ugyanaz, mint Panels.render: ikon + alsó sor, vagy két sor nagy szöveg. */
+function panelView(p) {
+  const or = (a, b) => (a && a.trim()) || b;
+  if (p.type === 'battery') { const pct = ui.battery ?? 76; return { title: `${or(p.title, 'Akku')} ${pct}%`, icon: barsIcon(pct), sub: pct <= 15 ? 'Alacsony!' : 'Telefon' }; }
+  if (p.type === 'network') return { title: `${or(p.title, 'Net')}: Mobilnet`, icon: 'sim', sub: 'Telekom HU' };
+  if (p.type === 'date') {
+    const d = new Date();
+    const day = d.toLocaleDateString('hu-HU', { weekday: 'long' });
+    return { title: or(p.title, 'Ma'), l1: day[0].toUpperCase() + day.slice(1), l2: d.toLocaleDateString('hu-HU', { month: 'long', day: 'numeric' }) };
+  }
+  if (p.type === 'calendar') return { title: or(p.title, 'Következő'), l1: 'Szerviz', l2: 'holnap 10:00' };
+  return p.icon ? { title: or(p.title, 'Saját'), icon: p.icon, sub: [p.line1, p.line2].filter(Boolean).join(' ') } : { title: or(p.title, 'Saját'), l1: p.line1, l2: p.line2 };
+}
+scr('weather', {
+  parent: 'main', app: 'wx',
+  items: () => {
+    const n = WX.now;
+    const l = [{ title: `Most ${n.temp}° ${wxDesc(n.code)}`, icon: wxIcon(n.code), sub: `Érzésre ${n.feels}° · ${n.wind} km/h` }];
+    if (S.nav.active) l.push({ title: `Célnál ${WX.dest.temp}° ${wxDesc(WX.dest.code)}`, icon: wxIcon(WX.dest.code), sub: S.nav.dest });
+    WX.hours.forEach(([t, temp, pop, code]) => l.push({ title: `${t}  ${temp}°`, icon: wxIcon(code, +t.slice(0, 2) < 17), sub: pop >= 20 ? `Eső ${pop}%` : wxDesc(code) }));
+    WX.days.forEach(([d, mn, mx, pop, code]) => l.push({ title: `${d} ${mn}°/${mx}°`, icon: wxIcon(code), sub: pop >= 20 ? `${wxDesc(code)} · ${pop}%` : wxDesc(code) }));
+    l.push({ title: 'Frissítés', icon: 'wx_cloudy', sub: `${WX.at || '--:--'}-kor frissült`, act: () => { WX.at = new Date().toLocaleTimeString('hu-HU', { hour: '2-digit', minute: '2-digit' }); render(); log('Időjárás frissítve (Open-Meteo)'); } });
     return l;
   },
 });
@@ -381,7 +472,7 @@ function key(k) {
     case 'SEARCHING': if (k === 'left' || k === 'back') { ui.searchToken++; openList('poi', screens.poi.index); } break;
     case 'NAV_LOADING':
     case 'NAV_ACTIVE':
-      if (k === 'left') { ui.mode = 'NAV_END'; render(); } else if (k === 'back') backToMain(0);
+      if (k === 'left') { ui.mode = 'NAV_END'; render(); } else if (k === 'back') backToMain(mainIndex('Navigáció'));
       break;
     case 'NAV_END':
       if (k === 'right') stopNav();
@@ -390,6 +481,7 @@ function key(k) {
     case 'MUSIC': musicKey(k); break;
     case 'PHONE': phoneKey(k); break;
     case 'CALL': callKey(k); break;
+    case 'ACCEL': accKey(k); break;
   }
 }
 
@@ -420,6 +512,68 @@ function drawQuick() {
   document.querySelectorAll('#quick .qm').forEach((r) => r.setAttribute('fill', +r.dataset.i === ui.quick ? '#4f80b5' : '#2b4766'));
 }
 
+// ---------------------------------------------------------------- gyorsulásmérés (0–100)
+// Állva élesedik, induláskor magától indul, a célsebességnél megáll (a valódi app a GPS-ből,
+// a lehető leggyakoribb lekéréssel; itt a „Gyorsítás” gomb szimulálja). ▸ új mérés, ▾ eredmények.
+const accTitle = () => `0-${S.prefs.accelTarget}`;
+const fmtAcc = (ms) => `${Math.floor(ms / 1000)}.${Math.floor(ms / 100) % 10} s`;
+function openAccel() {
+  ui.mode = 'ACCEL'; S.acc.browse = -1;
+  if (S.acc.state === 'NO_GPS') setTimeout(() => { if (S.acc.state === 'NO_GPS') { S.acc.state = 'READY'; render(); log('GPS jel megvan – állsz, a mérés élesítve.'); } }, 1200);
+  render();
+}
+function accKey(k) {
+  const c = S.acc;
+  if (k === 'right') { c.browse = -1; c.state = c.speed > 2 ? 'MOVING' : 'READY'; }
+  else if (k === 'down') { if (c.results.length) c.browse = (c.browse + 1) % c.results.length; }
+  else if (k === 'up') c.browse = -1;
+  else if (k === 'left' || k === 'back') { c.browse = -1; backToMain(mainIndex(accTitle())); return; }
+  render();
+}
+/** Szimulált gyorsítás: a sebesség 0,2 mp-enként nő (a valódi mérő a GPS-fixekből interpolál). */
+function accelRun() {
+  const c = S.acc;
+  if (!S.prefs.accel) { log('A gyorsulásmérés a Beállításokban ki van kapcsolva.'); return; }
+  if (ui.mode !== 'ACCEL') openAccel();
+  if (c.state !== 'READY') { log(c.state === 'NO_GPS' ? 'Még nincs GPS jel – várj egy pillanatot.' : 'Előbb állj meg (▸: új mérés).'); return; }
+  const a = 4 + Math.random() * 3;   // m/s²
+  const target = S.prefs.accelTarget;
+  const t0 = Date.now();
+  c.state = 'RUNNING'; c.startedAt = t0; c.speed = 0; render();
+  clearInterval(ui.accTimer);
+  let lastRender = 0;
+  ui.accTimer = setInterval(() => {
+    const t = (Date.now() - t0) / 1000;
+    c.speed = a * t * 3.6;
+    if (c.speed >= target) {
+      clearInterval(ui.accTimer);
+      const ms = Math.round(target / 3.6 / a * 1000);
+      c.lastBest = c.best < 0 || ms < c.best;
+      if (c.lastBest) c.best = ms;
+      c.last = ms; c.results.unshift({ ms, when: new Date() }); c.state = 'DONE';
+      log(`0-${target} km/h = ${fmtAcc(ms)}${c.lastBest ? ' (új legjobb)' : ''}`);
+      render();
+      // lassítás és megállás után magától újra élesedik
+      setTimeout(() => { c.speed = 0; if (c.state === 'DONE') { c.state = 'READY'; render(); } }, 5000);
+    } else if (Date.now() - lastRender >= 1000) { lastRender = Date.now(); render(); }   // a kijelző legfeljebb 1/mp
+  }, 200);
+}
+function accTile() {
+  const c = S.acc;
+  let title = `${accTitle()} km/h`, l1, l2;
+  const kmh = `${Math.round(c.speed)} km/h`;
+  if (c.browse >= 0 && c.browse < c.results.length) {
+    const r = c.results[c.browse];
+    title = `Eredmény ${c.browse + 1}/${c.results.length}`; l1 = fmtAcc(r.ms);
+    l2 = r.when.toLocaleString('hu-HU', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }) + (r.ms === c.best ? ' - legjobb' : '');
+  } else if (c.state === 'READY') { l1 = 'Indulhatsz!'; l2 = c.best >= 0 ? `Legjobb: ${fmtAcc(c.best)}` : 'GPS kész'; }
+  else if (c.state === 'MOVING') { l1 = 'Állj meg'; l2 = kmh; }
+  else if (c.state === 'RUNNING') { title = `${accTitle()} - mér`; l1 = fmtAcc(Date.now() - c.startedAt); l2 = kmh; }
+  else if (c.state === 'DONE') { title = `${accTitle()} km/h - kész`; l1 = fmtAcc(c.last); l2 = c.lastBest ? 'Új legjobb!' : `Legjobb: ${fmtAcc(c.best)}`; }
+  else { l1 = 'Nincs GPS jel'; l2 = 'Várj egy kicsit'; }
+  return contentTile('music', title, l1, l2, { up: c.browse >= 0, down: c.results.length > 0, back: true });
+}
+
 // ---------------------------------------------------------------- hívások
 function openContacts(list, parent) {
   ui.contacts = list;
@@ -435,6 +589,15 @@ function dial(c) {
   S.phone.prevView = S.phone.view === 'call' ? S.phone.prevView : S.phone.view;
   S.phone.view = 'call';
   renderApp();
+}
+function rainAlert() {
+  if (!S.prefs.rainAlert) { log('Az eső-figyelmeztetés a Beállításokban ki van kapcsolva.'); return; }
+  if (ui.native) { log('A motor saját nézetében az app nem küld semmit.'); return; }
+  showBanner('rain', ' Eső kb. 15 percen belül');
+  ui.notifShowing = true;
+  clearTimeout(ui.notifTimer);
+  ui.notifTimer = setTimeout(endNotif, 10000);
+  log('Eső-figyelmeztetés: a következő órában eső jön (Open-Meteo 15 perces előrejelzés).');
 }
 function incomingCall() {
   if (!S.prefs.calls) { log('A hívások a telefon Beállításaiban vannak kikapcsolva.'); return; }
@@ -511,6 +674,7 @@ function listKey(k) {
   }
 }
 
+function mainIndex(title) { return Math.max(0, screens.main.items().findIndex((i) => i.title === title)); }
 function backToMain(index) {
   screens.main.index = index;
   ui.current = screens.main;
@@ -573,7 +737,7 @@ function musicKey(k) {
   else if (a === 'play_pause') m.playing = !m.playing;
   else if (a === 'next') { m.track = (m.track + 1) % TRACKS.length; m.playing = true; }
   else if (a === 'prev') { m.track = (m.track + TRACKS.length - 1) % TRACKS.length; m.playing = true; }
-  else if (a === 'exit') { backToMain(1); return; }
+  else if (a === 'exit') { backToMain(mainIndex('Zene')); return; }
   render(); renderApp();
 }
 
@@ -796,6 +960,8 @@ function render() {
     const label = el ? el.dataset.label : 'Nincs elem';
     const sub = t.length ? `${S.phone.sel + 1}/${t.length}` : '';
     drawTile(listTile('phone', label, 'phone', { up: true, down: true, back: true, sub }));
+  } else if (m === 'ACCEL') {
+    drawTile(accTile());
   } else if (m === 'CALL') {
     const c = S.call;
     const ringing = c.state === 'ringing';
@@ -806,7 +972,7 @@ function render() {
 
 function showBanner(kind, text) {
   const b = $('#banner');
-  const icon = kind === 'nav' ? maneuverSvg(classify(text)) : svg(kind === 'call' ? 'phone' : 'msg');
+  const icon = kind === 'nav' ? maneuverSvg(classify(text)) : svg(kind === 'call' ? 'phone' : kind === 'rain' ? 'wx_rain' : 'msg');
   const changed = b.hidden || b.dataset.kind !== kind;
   b.className = 'banner' + (changed ? ' pop' : '');
   b.dataset.kind = kind;
@@ -934,6 +1100,20 @@ const APP_TABS = {
     };
     const keys = ['up', 'down', 'left', 'right', 'back'];
     return `<div class="app"><h3>Beállítások</h3>
+      <div class="card"><h4>Gyorsulásmérés (0–100)</h4>${sw('p-accel', p.accel, 'Gyorsulásmérés a motor főmenüjében', 'induláskor indul, a célsebességnél megáll')}
+        <div class="row"><label for="acc-target">Célsebesség (km/h)</label><select id="acc-target">${[50, 60, 80, 100, 120, 150, 200].map((v) => `<option ${v === p.accelTarget ? 'selected' : ''}>${v}</option>`).join('')}</select></div>
+        ${S.acc.results.length ? `<p>${S.acc.results.map((r) => `0-${p.accelTarget}: ${fmtAcc(r.ms)}${r.ms === S.acc.best ? ' ★' : ''}`).join(' · ')}</p>` : ''}</div>
+      <div class="card"><h4>Saját csempék</h4>
+        ${S.panels.map((x, i) => `<div class="list-item"><span class="li-ic">${svg(panelView(x).icon || 'card')}</span>
+          <div class="li-t">${esc(panelView(x).title)}<small>${PANEL_TYPES[x.type]} · ${PANEL_COLORS[x.color]}</small></div>
+          <button data-up-panel="${i}" aria-label="Feljebb">↑</button><button data-del-panel="${i}" aria-label="Törlés">✕</button></div>`).join('')}
+        <div class="add-row"><select id="pn-type">${Object.entries(PANEL_TYPES).map(([v, l]) => `<option value="${v}">${l}</option>`).join('')}</select>
+          <select id="pn-color">${Object.entries(PANEL_COLORS).map(([v, l]) => `<option value="${v}">${l}</option>`).join('')}</select></div>
+        <div class="add-row"><input id="pn-title" placeholder="Fejléc (pl. Emlékeztető)"></div>
+        <div class="add-row"><input id="pn-l1" placeholder="Szöveg (saját szövegnél)"><select id="pn-icon">${Object.entries(PANEL_ICONS).map(([v, l]) => `<option value="${v}" ${v === 'check' ? 'selected' : ''}>${l}</option>`).join('')}</select></div>
+        <div class="add-row"><button class="btn btn-primary" id="add-panel">Csempe hozzáadása</button></div></div>
+      <div class="card"><h4>Időjárás</h4>${sw('p-weather', p.weather, 'Időjárás a motor főmenüjében', 'a Navigáció fölött')}
+        ${sw('p-rainAlert', p.rainAlert, 'Eső-figyelmeztetés az alsó sávban')}</div>
       <div class="card"><h4>Zene</h4>${sw('p-musicInfo', p.musicInfo, 'Cím és előadó kiírása')}</div>
       <div class="card"><h4>Értesítések a motoron</h4>
         ${sw('p-notifPopup', p.notifPopup, 'Felugró sáv új értesítésnél')}
@@ -1002,19 +1182,32 @@ document.addEventListener('click', (ev) => {
   if (t.dataset.kmReset) { S.prefs.keymap[t.dataset.kmReset] = { ...KEYMAP_DEFAULTS[t.dataset.kmReset] }; renderAll(); return; }
   if (t.id === 'act-notif') newNotif();
   if (t.id === 'act-call') incomingCall();
+  if (t.id === 'act-rain') rainAlert();
+  if (t.id === 'act-accel') accelRun();
+  if (t.dataset.delPanel !== undefined) { S.panels.splice(+t.dataset.delPanel, 1); renderAll(); return; }
+  if (t.dataset.upPanel !== undefined) { const i = +t.dataset.upPanel; if (i > 0) { const [x] = S.panels.splice(i, 1); S.panels.splice(i - 1, 0, x); renderAll(); } return; }
+  if (t.id === 'add-panel') {
+    const type = $('#pn-type').value;
+    const panel = { type, title: $('#pn-title').value.trim(), line1: $('#pn-l1').value.trim(), line2: '', icon: type === 'text' ? $('#pn-icon').value : '', color: $('#pn-color').value };
+    if (type === 'text' && !panel.line1 && !panel.title) { log('Saját szövegnél adj meg fejlécet vagy szöveget.'); return; }
+    S.panels.push(panel);
+    ui.current = screens.custom; screens.custom.index = S.panels.length - 1; ui.mode = 'LIST';
+    renderAll(); log(`Új saját csempe: ${panelView(panel).title} – a motoron: Saját`); return;
+  }
   if (t.id === 'act-exit') exitToNative();
   if (t.id === 'act-track') { S.media.track = (S.media.track + 1) % TRACKS.length; S.media.playing = true; log(`Új szám: ${TRACKS[S.media.track].t} – ${TRACKS[S.media.track].a}`); if (ui.mode === 'MUSIC') render(); renderApp(); }
   if (t.id === 'act-step') nextNavStep(false);
   if (t.id === 'act-reset') {
     clearTimeout(ui.navTimer); clearInterval(ui.navAuto); clearInterval(ui.callTimer);
     S = freshState(); ui.overlay = false; ui.native = false; $('#tft').classList.remove('native');
-    hideBanner(); backToMain(0); renderApp(); log('Újrakezdve.');
+    hideBanner(); backToMain(mainIndex('Navigáció')); renderApp(); log('Újrakezdve.');
   }
 });
 
 document.addEventListener('change', (ev) => {
   const t = ev.target;
   if (t.id === 'sc-type') { $('#sc-what').innerHTML = shortcutWhatHtml(t.value); return; }
+  if (t.id === 'acc-target') { S.prefs.accelTarget = +t.value; S.acc.results = []; S.acc.best = -1; S.acc.last = -1; renderAll(); return; }
   if (t.id?.startsWith('p-')) {
     const k = t.id.slice(2);
     if (k === 'phoneControl' && t.checked && !confirm('A telefon vezérlése a motor gombjaival elvonhatja a figyelmet a vezetésről. A használat a saját felelősséged.\n\nBekapcsolod?')) { t.checked = false; return; }
@@ -1070,6 +1263,8 @@ tick();
 
 // indulás: nyitókép, majd a főmenü (mint a valódi kapcsolódáskor)
 buildCluster();
+// a saját „Akku” csempéhez a böngésző akkuszintje, ha elérhető
+navigator.getBattery?.().then((b) => { ui.battery = Math.round(b.level * 100); }).catch(() => {});
 drawTile(splashTile());
 renderApp();
-setTimeout(() => backToMain(0), 1300);
+setTimeout(() => backToMain(mainIndex('Navigáció')), 1300);
